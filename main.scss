@@ -166,3 +166,56 @@ div{
         background-color: desaturate(blue,40%); // 채도 40% 내림
     }
 }
+
+$number : 1;
+$string : bold;
+$color: red;
+$boolean: true;
+$null: null;
+$list: orange, royalblue,yellow; //array
+$map: ( //object {o:orange, r: red ,b: blue}
+    o: orange,
+    r: red,
+    b: blue
+);
+.box {
+    width: 100px; // 넘버
+    color: red; // 컬러 
+    position: relative; // 문자
+}
+
+//반복문 @each
+// list 데이터를 $c라는 변수로 넣어서 반복한다
+@each $c in $list {
+    .box {
+        color: $c;
+    }
+}
+@each $k, $v in $map {
+    .box-#{$k} {
+        color: $v;
+    }
+}
+
+// @content
+// 기본적인 mixin에다가 추가적으로 더할때 content 부분으로 수정된 내용이 플러스된다.
+@mixin left-top {
+    position:  absolute;
+    top: 0;
+    left: 0;
+    @content
+}
+.container {
+    width:100px;
+    height:100px;
+    @include left-top;
+}
+.box {
+    width: 200px;
+    height:300px;
+    @include left-top {
+        bottom: 0;
+        right: 0;
+        margin: auto;
+    }
+}
