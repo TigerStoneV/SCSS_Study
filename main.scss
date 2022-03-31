@@ -1,0 +1,168 @@
+// 가져오기
+@import "./sub.scss","./sub2.scss";
+
+// 컬러 변수선언
+$color: royalblue;
+$mainColor: red;
+.container {
+    h1 {
+        color:$color;
+        background-color: $mainColor;
+    }
+}
+ // Scss는 주석이 두개인데 일반 css의 주석처리와 js의 주석이 가능한데 차이점은
+ // <- 컴파일을 했을때 보이지 않고
+ /* <- 컴파일을 했을때 나타나게 된다 . */
+// , /* */
+
+// & - 상위 선택자 참조
+.btn {
+    position: absolute;
+    &.active{ // === .btn.active
+        color:red;
+    }
+}
+.list {
+    li{
+        &:last-child { // === li:last-child
+            margin-left: 0px;
+        }
+    }
+}
+.fs {
+    &-small {font-size: 15px;} // === .fs-small
+    &-medium {font-size: 25px;} // === .fs-medium
+    &-large {font-size: 35px;} // === .fs-large
+}
+
+// 중첩된 속성
+.box {
+    font: { // 네임 스페이스가 동일하다. font- 로 해석된다
+        weight: bold; // font-weight: bold;
+        size: 10px; // font-size: 10px;
+        family: sans-serif; // font-family: sans-serif;
+    }
+    margin: {
+        top:10px; //margin-top: 10px;
+        bottom:10px; //margin-bottom: 10px;
+    }
+}
+
+//변수
+$size : 200px; // size란 변수에 100px을 할당.
+// 유효범위가 있다 함수내 변수나 전역변수 느낌과 동일해서 
+// $size :200px은 어디서든 쓸수 있다
+// $inner:50px은 변수가 생성된 {}안에서만 사용이 가능하다
+
+// .box{
+//     font-size: $inner; //Error
+// }
+
+.container {
+    $inner :200px;
+    position: fixed;
+    top : $size; //200
+    bottom: $inner; //200
+    .item {
+        $inner : 50px;  //inner 재할당
+        width: $size; //200
+        height: $inner; // 50px
+        transform: translateX(100px);
+    }
+    left: $inner ; // 여기선 50px 이다 . 
+    // js 문법처럼 내부에서 재할당이 되었지만 밑으로 읽어내려가면서 할당된50px로 읽힌다
+}
+
+// 산술연산
+div{
+    width: 20px + 20px;
+    height: 40px - 10px;
+    font-size: 10px * 2 ;
+    // margin-top: 30px / 2;
+    // 나누기 연산자가 먹지않음 /이게 구분자 이기 때문에
+    //첫번째 방법 ()
+    // margin-bottom: (30px / 2);
+    // 두번째 방법 변수선언후 나누기
+    // $division : 30px;
+    // margin-left: $division / 2 ;
+    padding: 20px % 7 ; //나머지
+}
+span{
+    font-size: 10px;
+    line-height: 10px;
+    font-family: serif;
+    font: 10px / 10px serif;
+}
+div{
+    // width:100% - 200px; //Error 단위가 같아야함
+    width: calc(100% - 200px);
+}
+
+//재활용
+@mixin center { //center 선언
+    display: flex;
+    justify-content : center;
+    align-items: center;
+}
+.container {
+   @include center; // center 사용
+}
+
+//인수사용
+@mixin box($size: 100px , $color: tomato) { // size와 color의 기본값 추가
+    width: $size;
+    height: $size;
+    background-color: $color;
+}
+.container {
+    @include box(200px, red);
+    .item {
+        @include box($color: green); // size 기본값 사용 keyword인수 사용
+    }
+}
+.box {
+    @include box(50px);
+}
+// 반복문
+// for(let i = 0; i < 10; i++){
+//     console.log(`loop-${i}`)
+// }
+// scss의 보간법 #{}
+@for $i from 1 through 10 {
+    .box:nth-child(#{$i}) {
+        width:100px * $i;
+    }
+}
+
+//함수
+@mixin center { //center 선언
+    display: flex;
+    justify-content : center;
+    align-items: center;
+}
+
+@function ratio($size, $ratio) {
+    @return $size * $ratio
+}
+
+.box{
+    $width: 100px;
+    width: $width;
+    height: ratio($width, (9/16));
+    @include center
+}
+//내장함수
+.box {
+    // color: grayscale(red); gray로 변환
+    // color: invert(red) 색상반전
+    color: rgba(royalblue, .5); // opacity
+    background-color : mix(red,blue); //두가지 색상 섞는것
+    &-k{
+        color: lighten(red,20%); //색상 밝게해줌 20%
+        background-color :  darken(blue,20%); // 색상어둡게 해줌 20%
+    }
+    &-t{
+        color: saturate(royalblue,40%); // 채도 40% 올림
+        background-color: desaturate(blue,40%); // 채도 40% 내림
+    }
+}

@@ -1,0 +1,159 @@
+@charset "UTF-8";
+body .container {
+  background-color: tomato;
+}
+
+body {
+  background-color: yellow;
+}
+
+.container h1 {
+  color: royalblue;
+  background-color: red;
+}
+
+/* <- 컴파일을 했을때 나타나게 된다 . */
+.btn {
+  position: absolute;
+}
+.btn.active {
+  color: red;
+}
+
+.list li:last-child {
+  margin-left: 0px;
+}
+
+.fs-small {
+  font-size: 15px;
+}
+.fs-medium {
+  font-size: 25px;
+}
+.fs-large {
+  font-size: 35px;
+}
+
+.box {
+  font-weight: bold;
+  font-size: 10px;
+  font-family: sans-serif;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.container {
+  position: fixed;
+  top: 200px;
+  bottom: 200px;
+  left: 50px;
+}
+.container .item {
+  width: 200px;
+  height: 50px;
+  transform: translateX(100px);
+}
+
+div {
+  width: 40px;
+  height: 30px;
+  font-size: 20px;
+  padding: 6px;
+}
+
+span {
+  font-size: 10px;
+  line-height: 10px;
+  font-family: serif;
+  font: 10px/10px serif;
+}
+
+div {
+  width: calc(100% - 200px);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 200px;
+  height: 200px;
+  background-color: red;
+}
+.container .item {
+  width: 100px;
+  height: 100px;
+  background-color: green;
+}
+
+.box {
+  width: 50px;
+  height: 50px;
+  background-color: tomato;
+}
+
+.box:nth-child(1) {
+  width: 100px;
+}
+
+.box:nth-child(2) {
+  width: 200px;
+}
+
+.box:nth-child(3) {
+  width: 300px;
+}
+
+.box:nth-child(4) {
+  width: 400px;
+}
+
+.box:nth-child(5) {
+  width: 500px;
+}
+
+.box:nth-child(6) {
+  width: 600px;
+}
+
+.box:nth-child(7) {
+  width: 700px;
+}
+
+.box:nth-child(8) {
+  width: 800px;
+}
+
+.box:nth-child(9) {
+  width: 900px;
+}
+
+.box:nth-child(10) {
+  width: 1000px;
+}
+
+.box {
+  width: 100px;
+  height: 56.25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  color: rgba(65, 105, 225, 0.5);
+  background-color: purple;
+}
+.box-k {
+  color: #ff6666;
+  background-color: #000099;
+}
+.box-t {
+  color: #235aff;
+  background-color: #3333cc;
+}
+
+/*# sourceMappingURL=/main.39afc03c.css.map */
